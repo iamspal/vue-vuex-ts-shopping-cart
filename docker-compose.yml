@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  server_api:
+    container_name: server_api
+    restart: always
+    tty: true
+    image: node:14.17.3-alpine
+    command: sh -c "cd /app/ && npm install && npm run start"
+    expose: [3000]
+    ports:
+      - '3000:3000'
+    volumes:
+      - './server-api:/app/'
+  vue:
+    container_name: vue
+    restart: always
+    tty: true
+    image: node:14.17.3-alpine
+    command: sh -c "cd /app/ && npm install -g @vue/cli && npm install && npm run serve"
+    expose: [8080]
+    ports:
+      - '8080:8080'
+    volumes:
+      - './vue:/app/'
