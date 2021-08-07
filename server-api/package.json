@@ -4,7 +4,7 @@
   "description": "Shopping list Rest API for the Flowable technical interview",
   "main": "index.js",
   "scripts": {
-    "start": "json-server --watch db.json"
+    "start": "json-server --host 0.0.0.0 --watch db.json"
   },
   "author": "",
   "license": "ISC",
