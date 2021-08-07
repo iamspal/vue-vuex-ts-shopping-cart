@@ -19,6 +19,8 @@ export type Actions = {
   [ActionNames.GetProducts](context: ActionAugments): void
   [ActionNames.GetCartProducts](context: ActionAugments): void
   [ActionNames.AddToCart](context: ActionAugments, productId: string): void
+  [ActionNames.IncrementQuantity](context: ActionAugments, cartProduct: CartProduct): void
+  [ActionNames.DeIncrementQuantity](context: ActionAugments, cartProduct: CartProduct): void
 }
 
 const productService = new ProductService();
@@ -33,7 +35,7 @@ export const actions: ActionTree<State, State> & Actions = {
     const results = await cartService.getProducts();
     commit(MutationsName.SetCartProducts, results);
   },
-  async [ActionNames.AddToCart]({ commit, state, dispatch }, productId) {
+  async [ActionNames.AddToCart]({ state, dispatch }, productId) {
     // eslint-disable-next-line max-len
     const productToAddToCart : Product | undefined = state.products.find((product: Product) => product.id === productId);
     // eslint-disable-next-line max-len
@@ -57,5 +59,23 @@ export const actions: ActionTree<State, State> & Actions = {
 
       await dispatch(ActionNames.GetCartProducts);
     }
+  },
+  async [ActionNames.IncrementQuantity]({ dispatch }, cartProduct) {
+    // eslint-disable-next-line max-len
+    const newCartProduct = { ...cartProduct };
+    newCartProduct.qty += 1;
+    await cartService.updateProduct(newCartProduct);
+    await dispatch(ActionNames.GetCartProducts);
+  },
+  async [ActionNames.DeIncrementQuantity]({ dispatch }, cartProduct) {
+    // eslint-disable-next-line max-len
+    const newCartProduct = { ...cartProduct };
+    newCartProduct.qty -= 1;
+    if (newCartProduct.qty <= 0) {
+      await cartService.deleteProduct(newCartProduct.id);
+    } else {
+      await cartService.updateProduct(newCartProduct);
+    }
+    await dispatch(ActionNames.GetCartProducts);
   },
 };

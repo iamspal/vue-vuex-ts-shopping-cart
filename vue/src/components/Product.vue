@@ -1,6 +1,6 @@
 <template>
   <div class="product shadow">
-    <!--<img :src="img" :alt="name" class="product__img"/> !-->
+    <img :src="img" :alt="name" class="product__img"/>
     <img src="../assets/img/heart.svg" alt="Heart" class="product__fav"
          @click="$emit('mark-as-favorite',id)"/>
     <div class="p-3">

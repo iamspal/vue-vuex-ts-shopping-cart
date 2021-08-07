@@ -42,6 +42,8 @@
                 <span>x</span>
               </div>
             </div>
+
+            <CartProducts></CartProducts>
           </div>
         </div>
       </div>
@@ -51,10 +53,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import CartProducts from '@/components/CartProducts.vue';
 import MutationsName from '@/store/MutationsName';
 
 export default defineComponent({
   name: 'Header',
+  components: { CartProducts },
   computed: {
     isCartOpened() {
       return this.$store.state.isCartOpened;
@@ -108,7 +112,8 @@ export default defineComponent({
   /* Cart */
   &__cart-sidebar {
     position: fixed;
-    top: 73px;
+    padding-top: 15px;
+    top: 0;
     background: white;
     z-index: 500 !important;
     width: 30%;
@@ -123,6 +128,8 @@ export default defineComponent({
 
     &__title {
       color: $secondary;
+      margin-bottom: 20px;
+      margin-top: 10px;
     }
 
     &__close {

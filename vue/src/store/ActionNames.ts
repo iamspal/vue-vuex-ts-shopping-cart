@@ -3,6 +3,8 @@ enum ActionNames {
   GetProducts = 'GET_PRODUCTS',
   GetCartProducts = 'GET_CART_PRODUCTS',
   AddToCart = 'ADD_TO_CART',
+  IncrementQuantity = 'INCREMENT_QUANTITY',
+  DeIncrementQuantity = 'DE_INCREMENT_QUANTITY',
 }
 
 export default ActionNames;

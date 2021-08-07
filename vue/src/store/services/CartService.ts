@@ -16,7 +16,11 @@ export default class CartService extends Service {
     await this.post(this.apiEndPoint, cartProduct);
   }
 
-  async updateProduct(cartProduct: CartProduct) {
+  async updateProduct(cartProduct: CartProduct) : Promise<void> {
     await this.put(`${this.apiEndPoint}${cartProduct.id}`, cartProduct);
+  }
+
+  async deleteProduct(productId: string) : Promise<void> {
+    await this.delete(`${this.apiEndPoint}${productId}`);
   }
 }
