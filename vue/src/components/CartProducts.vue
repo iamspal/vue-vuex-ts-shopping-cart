@@ -1,6 +1,8 @@
 <template>
-  <div class="cart-product">
-    <div v-for="cartProduct in cartProducts" v-bind:key="cartProduct.id" class="mb-3">
+  <div class="cart-product d-flex flex-column justify-content-between" v-if="cartProducts.length">
+    <div v-for="cartProduct in cartProducts"
+         v-bind:key="cartProduct.id"
+         class="mb-3">
       <div class="row">
         <div class="col-3">
           <img :src="cartProduct.image_url" :alt="cartProduct.productName"
@@ -25,6 +27,18 @@
         </div>
       </div>
     </div>
+
+    <div class="row mt-5 border-top border-bottom pb-3 pt-3">
+      <div class="col-10">
+        <p class="h5 text-black mb-0">Total Amount</p>
+      </div>
+
+      <div class="col-2">
+        <p class="fw-bold text-primary text-black mb-0">
+          {{$filters.formatPrice(totalAmount)}}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,6 +52,9 @@ export default defineComponent({
   computed: {
     cartProducts(): CartProduct [] {
       return this.$store.state.cartProducts;
+    },
+    totalAmount() : number {
+      return this.$store.getters.totalAmount;
     },
   },
   methods: {

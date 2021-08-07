@@ -1,13 +1,16 @@
 import { GetterTree } from 'vuex';
-import Product from '@/store/types/Product';
 import { State } from './state';
 
 export type Getters = {
-  products(state: State): Product[]
+  totalAmount(state: State): number
 }
 
 export const getters: GetterTree<State, State> & Getters = {
-  products(state) {
-    return state.products;
+  totalAmount(state) {
+    if (state.cartProducts.length) {
+      // eslint-disable-next-line max-len
+      return state.cartProducts.map((cartProductPrev) => cartProductPrev.price).reduce((totalPrev, totalNext) => totalPrev + totalNext);
+    }
+    return 0;
   },
 };
