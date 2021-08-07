@@ -51,17 +51,18 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import MutationsName from '@/store/MutationsName';
 
 export default defineComponent({
   name: 'Header',
-  data() {
-    return {
-      isCartOpened: false as boolean,
-    };
+  computed: {
+    isCartOpened() {
+      return this.$store.state.isCartOpened;
+    },
   },
   methods: {
     async toggleCart() {
-      this.isCartOpened = !this.isCartOpened;
+      this.$store.commit(MutationsName.SetCartOpened, !this.isCartOpened);
     },
   },
 });

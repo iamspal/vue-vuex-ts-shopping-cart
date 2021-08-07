@@ -1,6 +1,8 @@
 <template>
   <div class="product shadow">
-    <img :src="img" :alt="name" class="product__img"/>
+    <!--<img :src="img" :alt="name" class="product__img"/> !-->
+    <img src="../assets/img/heart.svg" alt="Heart" class="product__fav"
+         @click="$emit('mark-as-favorite',id)"/>
     <div class="p-3">
       <div class="d-flex flex-row justify-content-between flex-wrap flex-md-nowrap">
         <p class="product__name">{{name}}</p>
@@ -12,7 +14,7 @@
         <p class="product__stock d-none d-md-block">{{stock}} left</p>
 
         <button class="btn btn-sm btn-primary text-uppercase" :disabled="stock <= 0"
-                @click="$emit('addToCart(id)')">+ Add to cart</button>
+                @click="$emit('add-to-cart',id)">+ Add to cart</button>
       </div>
     </div>
   </div>
@@ -57,6 +59,7 @@ export default defineComponent({
 @import "~bootstrap/scss/variables";
 
 .product {
+  position: relative;
   &__name {
     font-weight: bold;
     min-height: 2em;
@@ -64,6 +67,13 @@ export default defineComponent({
 
   &__img {
     width: 100%;
+  }
+
+  &__fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
   }
 
   &__stock {

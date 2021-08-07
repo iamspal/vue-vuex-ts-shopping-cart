@@ -8,7 +8,17 @@ export default class Service {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  get(url: string) {
+  protected get(url: string) {
     return axios.get(url);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  protected post<Type>(url: string, data: Type) {
+    return axios.post(url, data);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  protected put<Type>(url: string, data: Type) {
+    return axios.put(url, data);
   }
 }
