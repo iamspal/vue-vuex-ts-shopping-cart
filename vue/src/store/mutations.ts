@@ -8,6 +8,8 @@ export type Mutations = {
   [MutationsNameTypes.SetProducts](state: State, products: Product[]): void
   [MutationsNameTypes.SetCartProducts](state: State, products: CartProduct[]): void
   [MutationsNameTypes.SetCartOpened](state: State, cartOpened: boolean): void
+  [MutationsNameTypes.ToggleFavorite](state: State, payload : {
+    isFav : number, productIndex: number }): void
 }
 
 export const mutations: MutationTree<State> & Mutations = {
@@ -19,5 +21,8 @@ export const mutations: MutationTree<State> & Mutations = {
   },
   [MutationsNameTypes.SetCartOpened](state, isCartOpened) {
     state.isCartOpened = isCartOpened;
+  },
+  [MutationsNameTypes.ToggleFavorite](state, payload) {
+    state.products[payload.productIndex].favorite = payload.isFav;
   },
 };

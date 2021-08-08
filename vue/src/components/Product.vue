@@ -1,8 +1,10 @@
 <template>
   <div class="product shadow">
-    <img :src="img" :alt="name" class="product__img"/>
-    <img src="../assets/img/heart.svg" alt="Heart" class="product__fav"
-         @click="$emit('mark-as-favorite',id)"/>
+    <img :src="img" :alt="name" class="product__img" loading="lazy"/>
+    <img src="../assets/img/heart.png" alt="Heart" class="product__fav"
+         @click="$emit('toggle-favorite',id)" v-if="fav"/>
+    <img src="../assets/img/like.png" alt="Heart" class="product__fav"
+         @click="$emit('toggle-favorite',id)" v-else/>
     <div class="p-3">
       <div class="d-flex flex-row justify-content-between flex-wrap flex-md-nowrap">
         <p class="product__name">{{name}}</p>
@@ -50,6 +52,10 @@ export default defineComponent({
       required: true,
       type: Number,
     },
+    fav: {
+      required: true,
+      type: Number,
+    },
   },
 });
 </script>
@@ -57,12 +63,18 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
 
 .product {
   position: relative;
   &__name {
     font-weight: bold;
-    min-height: 2em;
+    min-height: 3em;
+    font-size: 14px;
+
+    @include media-breakpoint-up(md) {
+      font-size: 16px;
+    }
   }
 
   &__img {

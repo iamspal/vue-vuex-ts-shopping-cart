@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <div class="col-12 col-sm-4 col-md-4 col-lg-3 mb-5"
+      <div class="col-6 col-sm-4 col-md-4 col-lg-3 mb-5"
            v-for="product in products" v-bind:key="product.id">
         <Product :id="product.id"
                  :description="product.productDescription"
@@ -9,7 +9,9 @@
                  :name="product.productName"
                  :price="product.price"
                  :stock="product.stock"
-                 @add-to-cart="addToCart"/>
+                 :fav="product.favorite"
+                 @add-to-cart="addToCart"
+                 @toggle-favorite="toggleFavorite"/>
       </div>
     </div>
   </div>
@@ -19,6 +21,7 @@
 import { defineComponent } from 'vue';
 import Product from '@/components/Product.vue';
 import ActionNames from '@/store/ActionNames';
+import Utils from '@/utils/Utils';
 import MutationsName from '@/store/MutationsName';
 
 export default defineComponent({
@@ -36,7 +39,14 @@ export default defineComponent({
   methods: {
     addToCart(id: string) : void {
       this.$store.dispatch(ActionNames.AddToCart, id);
-      this.$store.commit(MutationsName.SetCartOpened, true);
+      if (Utils.isMobile()) {
+        this.$router.push('/cart');
+      } else {
+        this.$store.commit(MutationsName.SetCartOpened, true);
+      }
+    },
+    async toggleFavorite(id: string) {
+      await this.$store.dispatch(ActionNames.ToggleFavorite, id);
     },
   },
 });

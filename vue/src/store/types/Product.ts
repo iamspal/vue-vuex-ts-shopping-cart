@@ -1,5 +1,5 @@
  interface Product {
-   favorite: string;
+   favorite: number;
    id: string;
    // eslint-disable-next-line camelcase
    image_url: string;

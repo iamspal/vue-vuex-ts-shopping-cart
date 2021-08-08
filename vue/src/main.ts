@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import filters from '@/filters/filters';
+import filters from '@/utils/filters/filters';
 import App from './App.vue';
 import router from './router';
 import { store } from './store';

@@ -8,8 +8,8 @@ export type Getters = {
 export const getters: GetterTree<State, State> & Getters = {
   totalAmount(state) {
     if (state.cartProducts.length) {
-      // eslint-disable-next-line max-len
-      return state.cartProducts.map((cartProductPrev) => cartProductPrev.price).reduce((totalPrev, totalNext) => totalPrev + totalNext);
+      return state.cartProducts.map((cartProduct) => cartProduct.price * cartProduct.qty)
+        .reduce((totalPrev, totalNext) => totalPrev + totalNext);
     }
     return 0;
   },

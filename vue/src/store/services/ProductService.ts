@@ -11,4 +11,8 @@ export default class ProductService extends Service {
     const result = await this.get(this.apiEndPoint);
     return result.data;
   }
+
+  async updateProduct(product: Product) : Promise<void> {
+    await this.put(`${this.apiEndPoint}${product.id}`, product);
+  }
 }

@@ -21,6 +21,7 @@ export type Actions = {
   [ActionNames.AddToCart](context: ActionAugments, productId: string): void
   [ActionNames.IncrementQuantity](context: ActionAugments, cartProduct: CartProduct): void
   [ActionNames.DeIncrementQuantity](context: ActionAugments, cartProduct: CartProduct): void
+  [ActionNames.ToggleFavorite](context: ActionAugments, productId: string): void
 }
 
 const productService = new ProductService();
@@ -60,14 +61,13 @@ export const actions: ActionTree<State, State> & Actions = {
       await dispatch(ActionNames.GetCartProducts);
     }
   },
-  async [ActionNames.IncrementQuantity]({ dispatch }, cartProduct) {
+  async [ActionNames.IncrementQuantity](context, cartProduct) {
     // eslint-disable-next-line max-len
     const newCartProduct = { ...cartProduct };
     newCartProduct.qty += 1;
     await cartService.updateProduct(newCartProduct);
-    await dispatch(ActionNames.GetCartProducts);
   },
-  async [ActionNames.DeIncrementQuantity]({ dispatch }, cartProduct) {
+  async [ActionNames.DeIncrementQuantity](context, cartProduct) {
     // eslint-disable-next-line max-len
     const newCartProduct = { ...cartProduct };
     newCartProduct.qty -= 1;
@@ -76,6 +76,16 @@ export const actions: ActionTree<State, State> & Actions = {
     } else {
       await cartService.updateProduct(newCartProduct);
     }
-    await dispatch(ActionNames.GetCartProducts);
+  },
+  async [ActionNames.ToggleFavorite]({ state, commit }, productId) {
+    // eslint-disable-next-line max-len
+    const productToMarkAsFavIndex : number = state.products.findIndex((product) => product.id === productId);
+    const productToMarkAsFav : Product = { ...state.products[productToMarkAsFavIndex] };
+    productToMarkAsFav.favorite = Number(!productToMarkAsFav.favorite);
+    await productService.updateProduct(productToMarkAsFav);
+    commit(MutationsName.ToggleFavorite, {
+      isFav: productToMarkAsFav.favorite,
+      productIndex: productToMarkAsFavIndex,
+    });
   },
 };

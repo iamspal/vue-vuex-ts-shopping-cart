@@ -4,10 +4,10 @@
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-start">
           <!-- Logo !-->
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white
+          <router-link to="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white
           text-decoration-none">
             <img src="../assets/img/cart.png" alt="Cart" class="header__logo">
-          </a>
+          </router-link>
 
           <!-- Navigation !-->
           <ul class="nav col-3 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -24,12 +24,12 @@
          @click="toggleCart()">
       <img src="../assets/img/shopping-cart.png" alt="Cart">
       <span class="cart__count d-flex flex-column align-items-center justify-content-center">
-        0
+        {{countCartProducts}}
       </span>
     </div>
 
     <!-- Cart sidebar !-->
-    <div class="header__cart-sidebar p-2 shadow"
+    <div class="header__cart-sidebar p-2 shadow scroll"
          :class="{'header__cart-sidebar--open': isCartOpened}">
       <div class="container">
         <div class="row">
@@ -55,6 +55,7 @@
 import { defineComponent } from 'vue';
 import CartProducts from '@/components/CartProducts.vue';
 import MutationsName from '@/store/MutationsName';
+import Utils from '@/utils/Utils';
 
 export default defineComponent({
   name: 'Header',
@@ -63,10 +64,17 @@ export default defineComponent({
     isCartOpened() {
       return this.$store.state.isCartOpened;
     },
+    countCartProducts() {
+      return this.$store.state.cartProducts.length;
+    },
   },
   methods: {
-    async toggleCart() {
-      this.$store.commit(MutationsName.SetCartOpened, !this.isCartOpened);
+    toggleCart() {
+      if (Utils.isMobile()) {
+        this.$router.push('/cart');
+      } else {
+        this.$store.commit(MutationsName.SetCartOpened, !this.isCartOpened);
+      }
     },
   },
 });
@@ -75,6 +83,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
 
 .header {
   position: relative;
@@ -116,11 +125,28 @@ export default defineComponent({
     top: 0;
     background: white;
     z-index: 500 !important;
-    width: 30%;
+    width: 80%;
     right: -100%;
     transition: 0.3s ease-in-out;
     height: 100%;
-    overflow: hidden;
+    overflow-y: visible;
+    overflow-x: hidden;
+
+    @include media-breakpoint-up(sm) {
+      width: 80%;
+    }
+
+    @include media-breakpoint-up(md) {
+      width: 70%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 30%;
+    }
 
     &--open {
       right: 0;

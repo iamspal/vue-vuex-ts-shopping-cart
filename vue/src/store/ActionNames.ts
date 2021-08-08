@@ -5,6 +5,7 @@ enum ActionNames {
   AddToCart = 'ADD_TO_CART',
   IncrementQuantity = 'INCREMENT_QUANTITY',
   DeIncrementQuantity = 'DE_INCREMENT_QUANTITY',
+  ToggleFavorite = 'TOGGLE_FAVORITE',
 }
 
 export default ActionNames;
