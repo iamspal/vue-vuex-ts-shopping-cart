@@ -11,6 +11,9 @@ services:
       - '3000:3000'
     volumes:
       - './server-api:/app/'
+    networks:
+      vue_server_api:
+        ipv4_address: 172.30.0.23
   vue:
     container_name: vue
     restart: always
@@ -22,3 +25,14 @@ services:
       - '8080:8080'
     volumes:
       - './vue:/app/'
+    depends_on:
+      - server_api
+    networks:
+      vue_server_api:
+        ipv4_address: 172.30.0.22
+
+networks:
+  vue_server_api:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
