@@ -7,7 +7,7 @@
       "productName": "Unbranded Metal Chair",
       "price": 43,
       "productDescription": "Porro tempore autem. Sunt molestias qui quod recusandae nemo quia optio. Nostrum aperiam officiis aut reprehenderit illo.",
-      "favorite": 0
+      "favorite": 1
     },
     {
       "id": "20cc33f1-223b-4cf0-878d-fdedb3f60b56",
@@ -16,7 +16,7 @@
       "productName": "Handcrafted Metal Towels",
       "price": 98,
       "productDescription": "Rerum minima laudantium blanditiis dolorem dolores ut sint ut quidem. Est doloremque repellat excepturi dolor consequatur rerum qui. Facere ut vel et enim accusamus ipsum dolores aut. Eaque quo ut omnis unde quam error voluptas non iure.",
-      "favorite": 0
+      "favorite": 1
     },
     {
       "id": "ab284424-8e46-4a3e-8e13-e179b0ab8bb5",
@@ -70,7 +70,7 @@
       "productName": "Rustic Soft Table",
       "price": 49,
       "productDescription": "Exercitationem iure quia officiis sed hic illo iusto vero maxime. Fuga iste quia nemo. Officiis nihil veritatis doloremque in praesentium sit autem fugit.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "57483e83-1378-42f3-8d40-e4d75e4ff767",
@@ -79,7 +79,7 @@
       "productName": "Fantastic Fresh Car",
       "price": 23,
       "productDescription": "Rem et id blanditiis deleniti et. Consectetur illo veniam. Et dolores voluptatem ullam et error quis aut. Corrupti aut et aut id. Unde iusto et qui doloremque vel commodi alias.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "11a7aee9-d712-4395-9c35-bde70c9f0171",
@@ -106,7 +106,7 @@
       "productName": "Tasty Wooden Car",
       "price": 90,
       "productDescription": "Voluptatibus quia est eveniet consequatur est veritatis. Esse ex sapiente. Consequatur numquam quam assumenda vel. Itaque non consectetur sed doloribus perspiciatis. Corporis officiis deserunt.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "031806fb-89b6-4790-a889-5c0fa94d380a",
@@ -115,7 +115,7 @@
       "productName": "Handcrafted Granite Pants",
       "price": 4,
       "productDescription": "Impedit nihil dolorem. Illum reprehenderit sit. Doloribus quo reprehenderit beatae est vero. Expedita ut praesentium. Incidunt quisquam a dolore a animi. Voluptas molestiae aut fuga.",
-      "favorite": 1
+      "favorite": 0
     },
     {
       "id": "9dbcefef-804d-483d-8e1c-28941866a85c",
