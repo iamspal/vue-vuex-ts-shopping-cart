@@ -11,7 +11,9 @@
         <p class="fw-bold text-primary">{{$filters.formatPrice(price)}}</p>
       </div>
 
-      <p class="d-none d-md-block">{{$filters.limitCharacters(description,50)}}...</p>
+      <p class="d-none d-md-block">
+        {{$filters.limitCharacters(description,descriptionMaxLength)}}...
+      </p>
       <div class="d-flex flex-row justify-content-between align-items-start flex-wrap">
         <p class="product__stock d-none d-md-block">{{stock}} left</p>
 
@@ -53,6 +55,10 @@ export default defineComponent({
       type: Number,
     },
     fav: {
+      required: true,
+      type: Number,
+    },
+    descriptionMaxLength: {
       required: true,
       type: Number,
     },

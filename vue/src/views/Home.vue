@@ -10,6 +10,7 @@
                  :price="product.price"
                  :stock="product.stock"
                  :fav="product.favorite"
+                 :description-max-length="50"
                  @add-to-cart="addToCart"
                  @toggle-favorite="toggleFavorite"/>
       </div>
@@ -32,15 +33,15 @@ export default defineComponent({
       return this.$store.state.products;
     },
   },
-  created() {
-    this.$store.dispatch(ActionNames.GetProducts);
-    this.$store.dispatch(ActionNames.GetCartProducts);
+  async mounted() {
+    await this.$store.dispatch(ActionNames.GetProducts);
+    await this.$store.dispatch(ActionNames.GetCartProducts);
   },
   methods: {
-    addToCart(id: string) : void {
-      this.$store.dispatch(ActionNames.AddToCart, id);
+    async addToCart(id: string) {
+      await this.$store.dispatch(ActionNames.AddToCart, id);
       if (Utils.isMobile()) {
-        this.$router.push('/cart');
+        await this.$router.push('/cart');
       } else {
         this.$store.commit(MutationsName.SetCartOpened, true);
       }
